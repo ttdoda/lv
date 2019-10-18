@@ -16,6 +16,8 @@ public int WIDTH, HEIGHT;		/* one based */
 public boolean_t allow_ansi_esc;
 public boolean_t no_scroll;
 
+public boolean_t use_ca_mode;
+
 public boolean_t allow_interrupt;
 public boolean_t kb_interrupted;
 public boolean_t window_changed;

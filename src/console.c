@@ -327,8 +327,10 @@ public void ConsoleTermInit()
   exit_attribute_mode	= tgetstr( "me", &ptr );
   cursor_visible	= tgetstr( "ve", &ptr );
   cursor_invisible	= tgetstr( "vi", &ptr );
-  enter_ca_mode		= tgetstr( "ti", &ptr );
-  exit_ca_mode		= tgetstr( "te", &ptr );
+  if( use_ca_mode ) {
+    enter_ca_mode	= tgetstr( "ti", &ptr );
+    exit_ca_mode	= tgetstr( "te", &ptr );
+  }
 
   keypad_local		= tgetstr( "ke", &ptr );
   keypad_xmit		= tgetstr( "ks", &ptr );

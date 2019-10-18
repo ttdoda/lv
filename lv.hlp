@@ -218,6 +218,9 @@ OOPPTTIIOONNSS
 
        -v     Invert the sense of matching on lgrep.
 
+       -X     Disables to  use  the  termcap  initialization  and
+              deinitialization strings.
+
        -z     Enable  HZ auto-detection (also enabled by run-time
               C-t).
 

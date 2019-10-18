@@ -119,6 +119,7 @@ private void ConfInitArgs( conf_t *conf )
   carefully_divide	= TRUE;		/* display.h */
   adjust_charset	= TRUE;		/* guess.h */
   no_scroll		= TRUE;		/* console.h */
+  use_ca_mode		= TRUE;		/* console.h */
 
   allow_unify		= FALSE;	/* itable_t.h */
   allow_ansi_esc	= FALSE;	/* console.h */
@@ -293,6 +294,7 @@ private void ConfArg( conf_t *conf, byte **argv, byte *location )
       case 's': smooth_paging = TRUE; s++; continue;
       case 'u': allow_unify = TRUE; s++; continue;
       case 'v': grep_inverted = TRUE; s++; continue;
+      case 'X': use_ca_mode = FALSE; s++; continue;
       case 'z': hz_detection = TRUE; s++; continue;
       case '+': ConfInitArgs( conf ); s++; continue;
       case 'h': conf->file = lvHelpFile; break;
@@ -331,6 +333,7 @@ private void ConfArg( conf_t *conf, byte **argv, byte *location )
       case 's': smooth_paging = FALSE; s++; continue;
       case 'u': allow_unify = FALSE; s++; continue;
       case 'v': grep_inverted = FALSE; s++; continue;
+      case 'X': use_ca_mode = TRUE; s++; continue;
       case 'z': hz_detection = FALSE; s++; continue;
       case SP:
       case HT:
