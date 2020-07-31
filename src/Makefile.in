@@ -79,7 +79,7 @@ install::
 
 uninstall::
 	for i in $(bindir)/lv $(bindir)/lgrep $(lvlibdir)/lv.hlp $(mandir)/man1/lv.1; do \
-		if test -f $$i; then /bin/rm -f $$i; \
+		if test -f $$i; then /bin/rm -f $$i; fi; \
 	done
 
 #------------------------------------------------------------
