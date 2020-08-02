@@ -21,6 +21,7 @@
  */
 
 #include <stdio.h>
+#include <string.h> /* strcmp */
 
 #include <import.h>
 #include <decode.h>

@@ -29,6 +29,7 @@
 #include <langinfo.h>
 #endif
 
+#include <ctype.h> /* toupper */
 #include <import.h>
 #include <ctable.h>
 #include <begin.h>
