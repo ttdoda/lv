@@ -1,5 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(ascii.h)
+AC_INIT([lv],[4.51])
+AC_CONFIG_SRCDIR([ascii.h])
 
 dnl Checks for programs.
 AC_PROG_LN_S
@@ -13,7 +14,7 @@ AC_MSG_CHECKING(if --enable-purify is specified)
 AC_SUBST(PURIFY)
 PURIFY=
 AC_ARG_ENABLE(purify,
-	[ --enable-purify          enables checks by purify],
+	[AS_HELP_STRING([--enable-purify],[enables checks by purify])],
 	[AC_MSG_RESULT(yes)
 	AC_PATH_PROGS(PURIFY, purify, "")
 	if test "$PURIFY" != ""; then
@@ -22,12 +23,11 @@ AC_ARG_ENABLE(purify,
 	[AC_MSG_RESULT(no)])
 
 dnl Checks for libraries.
-AC_DEFINE(UNIX)
-AC_DEFINE(TERMCAP)
+AC_DEFINE([UNIX], [1], [Define for UNIX-like systems.])
+AC_DEFINE([TERMCAP], [1], [Define to use termcap/terminfo.])
 AC_CHECK_LIB(terminfo, tgetstr,, [AC_CHECK_LIB(termcap, tgetstr,, [AC_CHECK_LIB(ncurses, tgetstr,, [AC_CHECK_LIB(curses, tgetstr)])])])
 
 dnl Checks for header files.
-AC_HEADER_STDC
 AC_HEADER_SYS_WAIT
 AC_CHECK_HEADERS(fcntl.h sys/ioctl.h sys/time.h termio.h unistd.h termios.h locale.h)
 
@@ -36,18 +36,17 @@ dnl Checks for typedefs, structures, and compiler characteristics.
 dnl Checks for library functions.
 AC_CHECK_FUNCS(sigvec tgetnum setlocale)
 AC_FUNC_GETPGRP
-AC_PROG_GCC_TRADITIONAL
-AC_TYPE_SIGNAL
+AC_DEFINE([RETSIGTYPE], [void], [Define as the return type of signal handlers.])
 
 dnl From Bruno Haible.
 
 AC_DEFUN([AM_LANGINFO_CODESET],
 [
   AC_CACHE_CHECK([for nl_langinfo and CODESET], am_cv_langinfo_codeset,
-    [AC_TRY_LINK([#include <langinfo.h>],
-      [char* cs = nl_langinfo(CODESET);],
-      am_cv_langinfo_codeset=yes,
-      am_cv_langinfo_codeset=no)
+    [AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <langinfo.h>]],
+      [[char* cs = nl_langinfo(CODESET);]])],
+      [am_cv_langinfo_codeset=yes],
+      [am_cv_langinfo_codeset=no])
     ])
   if test $am_cv_langinfo_codeset = yes; then
     AC_DEFINE(HAVE_LANGINFO_CODESET, 1,
@@ -57,5 +56,5 @@ AC_DEFUN([AM_LANGINFO_CODESET],
 
 AM_LANGINFO_CODESET
 
-dnl AC_OUTPUT(Makefile src/Makefile)
-AC_OUTPUT(Makefile)
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT

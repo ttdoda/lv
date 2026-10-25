@@ -109,8 +109,13 @@ private int (*putfunc)(int) = putchar;
 private char entry[ 1024 ];
 private char func[ 1024 ];
 
-extern char *tgetstr(), *tgoto();
-extern int tgetent(), tgetflag(), tgetnum(), tputs();
+extern char *tgetstr( const char *id, char **area );
+extern char *tgoto( const char *cap, int col, int row );
+extern int tgetent( char *bp, const char *name );
+extern int tgetflag( const char *id );
+extern int tgetnum( const char *id );
+extern int tigetnum( const char *capname );
+extern int tputs( const char *str, int affcnt, int (*putc)( int ) );
 
 private char *cursor_address		= NULL;
 private char *clear_screen		= NULL;
@@ -291,7 +296,7 @@ public void ConsoleTermInit()
 #endif /* MSDOS */
 
 #ifdef TERMCAP
-  byte *term, *ptr;
+  char *term, *ptr;
 #endif
 #ifdef TERMINFO
   byte *term;
